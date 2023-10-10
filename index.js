@@ -9,7 +9,7 @@ const app = express()
 
 
 // port from env file
-dotenv.config({path:'.env'})
+dotenv.config({ path: '.env' })
 const port = process.env.PORT;
 console.log(port)
 
@@ -22,6 +22,6 @@ app.use(bodyParser.json());
 app.use('/', apis);
 
 //Server setup
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`server is running on port ${port}`)
 })

@@ -9,6 +9,7 @@ router.get("/user/getall", user_controller.getAll);
 router.get("/user/:id", user_controller.getById);
 router.patch("/user/edit/:id", user_controller.edit);
 //router.delete("/user/delete/:id", user_controller.delete);
+router.post("/user/login", user_controller.login);
 
 //blog routes
 router.post('/blog/add', blog_controller.add);

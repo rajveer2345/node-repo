@@ -2,6 +2,33 @@ const user = require('../schema/userSchema');
 const bcrypt = require("bcrypt");
 
 
+exports.login = async(req, res) => {
+    try {
+
+        console.log(req.body);
+        const salt = await bcrypt.genSalt(10);
+        //req.body.password = await bcrypt.hash(req.body.password, salt);
+        const userData = await user.findOne({ email: req.body.email });
+
+
+        if (!userData) {
+            res.json({ message: "User not found" });
+            return;
+        }
+
+        const passwordMatch = await bcrypt.compare(req.body.password, userData.password);
+
+        if (passwordMatch) {
+            res.json({ message: "success", data: userData }); //jsonwebtoken
+        } else {
+            res.json({ message: "Username or password don't match" });
+        }
+    } catch (err) {
+        res.status(500).json(err)
+
+    }
+};
+
 exports.add = async(req, res) => {
     try {
 
